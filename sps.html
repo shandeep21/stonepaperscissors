@@ -9,6 +9,8 @@
     <button>hi</button>
   </body>
   <script>
+    let us = 0;
+    let co = 0;
     function computerPlay(params) {
       let ran = Math.floor(Math.random() * 3);
       //console.log(ran);
@@ -16,26 +18,25 @@
       return hand[ran];
     }
     function playGame(computerSelection, playerSelection) {
-      if (playerSelection == computerSelection) {
-        console.log("DRAW");
-      } else if (playerSelection == "rock" && computerSelection == "paper") {
-        console.log("You Lose! paper beats rock");
-      } else if (playerSelection == "rock" && computerSelection == "scissors") {
-        console.log("You Win! rock beats scissors");
-      } else if (
-        playerSelection == "paper" &&
-        computerSelection == "scissors"
+      let res;
+      let ps = playerSelection;
+      let cs = computerSelection;
+
+      if (ps === cs) {
+        return -1;
+      }
+
+      if (
+        (ps === "rock" && cs === "scissors") ||
+        (ps === "scissors" && cs === "paper") ||
+        (ps === "paper" && cs === "rock")
       ) {
-        console.log("You Lose! scissors beats paper");
-      } else if (playerSelection == "paper" && computerSelection == "rock") {
-        console.log("You Win! paper beats rock");
-      } else if (playerSelection == "scissors" && computerSelection == "rock") {
-        console.log("You Lose! rock beats scissors");
-      } else if (
-        playerSelection == "scissors" &&
-        computerSelection == "paper"
-      ) {
-        console.log("You Win! scissors beats paper");
+        console.log(`You win! ${ps} beats ${cs}`);
+        return 1;
+      } else {
+        console.log(`You lost! ${cs} beats ${ps}`);
+
+        return 0;
       }
     }
     function newGame() {
@@ -46,7 +47,28 @@
         console.log(playerSelection + "---" + "USER");
         let computerSelection = computerPlay();
         console.log(computerSelection + "---" + "COMPUTER");
-        playGame(computerSelection, playerSelection);
+        let x = playGame(computerSelection, playerSelection);
+
+        if (x === -1) {
+          console.log("draw!");
+        }
+        if (x === 0) {
+          co++;
+          console.log("computer won");
+        } else if (x === 1) {
+          us++;
+          console.log("u won");
+        }
+      }
+      if (us > co) {
+        console.log("U WON THE MATCH");
+        console.log("SCORE" + "  " + us + "---" + co);
+      } else if (us < co) {
+        console.log("U LOST THE MATCH");
+        console.log("SCORE" + "  " + us + "---" + co);
+      } else if (us === co) {
+        console.log("MATCH TIE");
+        console.log("SCORE" + "  " + us + "---" + co);
       }
     }
   </script>
