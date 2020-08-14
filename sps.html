@@ -1,10 +1,53 @@
+<!--<!DOCTYPE html>-->
 <html>
+  <head>
+    <title>StonePaperScissors</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <button onclick="newGame()">play game!</button>
+  </body>
   <script>
     function computerPlay(params) {
       let ran = Math.floor(Math.random() * 3);
-      console.log(ran);
+      //console.log(ran);
+      let hand = ["rock", "paper", "scissors"];
+      return hand[ran];
     }
-    computerPlay();
+    function playGame(computerSelection, playerSelection) {
+      if (playerSelection == computerSelection) {
+        console.log("DRAW");
+      } else if (playerSelection == "rock" && computerSelection == "paper") {
+        console.log("You Lose! paper beats rock");
+      } else if (playerSelection == "rock" && computerSelection == "scissors") {
+        console.log("You Win! rock beats scissors");
+      } else if (
+        playerSelection == "paper" &&
+        computerSelection == "scissors"
+      ) {
+        console.log("You Lose! scissors beats paper");
+      } else if (playerSelection == "paper" && computerSelection == "rock") {
+        console.log("You Win! paper beats rock");
+      } else if (playerSelection == "scissors" && computerSelection == "rock") {
+        console.log("You Lose! rock beats scissors");
+      } else if (
+        playerSelection == "scissors" &&
+        computerSelection == "paper"
+      ) {
+        console.log("You Win! scissors beats paper");
+      }
+    }
+    function newGame() {
+      for (let index = 0; index < 5; index++) {
+        let playerSel = window.prompt("play ur game");
+        //console.log(playerSelection.toLowerCase());
+        let playerSelection = playerSel.toLowerCase();
+        console.log(playerSelection + "---" + "USER");
+        let computerSelection = computerPlay();
+        console.log(computerSelection + "---" + "COMPUTER");
+        playGame(computerSelection, playerSelection);
+      }
+    }
   </script>
   <body></body>
 </html>
