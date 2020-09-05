@@ -1,0 +1,102 @@
+<!--<!DOCTYPE html>-->
+<html>
+  <head>
+    <title>StonePaperScissors</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <button data-but="r" value="rock">rock</button>
+    <button data-but="p" value="paper">paper</button>
+    <button data-but="s" value="scissors">scissors</button>
+    <div id="results"></div>
+    <h1 id="h1"></h1>
+  </body>
+  <script>
+    let us = 0;
+    let co = 0;
+    const results = document.querySelector("#results");
+    const h1 = document.querySelector("#h1");
+    const compresult = document.createElement("h2");
+    results.classList.add("compresult");
+    results.appendChild(compresult);
+    function computerPlay(params) {
+      let ran = Math.floor(Math.random() * 3);
+      //console.log(ran);
+      let hand = ["rock", "paper", "scissors"];
+      return hand[ran];
+    }
+    function playGame(computerSelection, playerSelection) {
+      let res;
+      let ps = playerSelection;
+      let cs = computerSelection;
+
+      if (ps === cs) {
+        return -1;
+      }
+
+      if (
+        (ps === "rock" && cs === "scissors") ||
+        (ps === "scissors" && cs === "paper") ||
+        (ps === "paper" && cs === "rock")
+      ) {
+        console.log(`You win! ${ps} beats ${cs}`);
+        return 1;
+      } else {
+        console.log(`You lost! ${cs} beats ${ps}`);
+
+        return 0;
+      }
+    }
+
+    //console.log("you can play the game now");
+    //console.log(playerSelection.toLowerCase());
+    function printRockPaperScissor(e) {
+      let playerSel = this.value;
+      console.log(playerSel);
+
+      let playerSelection = playerSel.toLowerCase();
+      console.log(playerSelection + "---" + "USER");
+      let computerSelection = computerPlay();
+      console.log(computerSelection + "---" + "COMPUTER");
+      let x = playGame(computerSelection, playerSelection);
+
+      if (x === -1) {
+        console.log("draw!");
+        compresult.textContent = "Draw";
+      }
+      if (x === 0) {
+        co++;
+        console.log("computer won");
+        compresult.textContent = "computer won";
+      } else if (x === 1) {
+        us++;
+        console.log("u won");
+        compresult.textContent = "U WON";
+      }
+      if (us == 5) {
+        if (us > co) {
+          console.log("U WON THE MATCH");
+          h1.textContent = "U WON THE MATCH";
+          console.log("SCORE" + "  " + us + "---" + co);
+        } else if (us < co) {
+          console.log("U LOST THE MATCH");
+          h1.textContent = "U LOST THE MATCH";
+          console.log("SCORE" + "  " + us + "---" + co);
+        } else if (us === co) {
+          console.log("MATCH TIE");
+          h1.textContent = "MATCH TIE";
+          console.log("SCORE" + "  " + us + "---" + co);
+        }
+      }
+    }
+
+    const but1 = document.querySelector("button[data-but = 'r']");
+    but1.addEventListener("click", printRockPaperScissor);
+    const but2 = document.querySelector("button[data-but = 'p']");
+    but2.addEventListener("click", printRockPaperScissor);
+    const but3 = document.querySelector("button[data-but = 's']");
+    but3.addEventListener("click", printRockPaperScissor);
+    const dom = document.querySelector("#dom");
+  </script>
+  <body></body>
+</html>
